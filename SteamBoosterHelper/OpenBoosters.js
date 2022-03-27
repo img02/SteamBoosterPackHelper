@@ -13,6 +13,8 @@ let parent = document.getElementById('inventory_logos');
 //button Event Listener
 button.addEventListener("click", ()=>{
     getInventory();
+    createScriptString();
+    OpenBoosters();
 });
 
 parent.appendChild(button);
@@ -24,8 +26,16 @@ parent.appendChild(button);
 var names = '';
 var scriptString = '';
 
+function OpenBoosters(){ //inject script
+let script = document.createElement('script');
+script.type = 'text/javascript';
+script.textContent = scriptString;
+document.head.appendChild(script);
+}
+
 function getInventory(){
-var elements = document.getElementsByClassName("item app753 context6");
+	//gets the first 50 items in inventory, unless user loads more pages
+var elements = document.getElementsByClassName("item app753 context6"); 
 for(var i = 0; i < elements.length; i++) {
     names += elements[i].id + " ";
     }
@@ -37,7 +47,7 @@ for(var i = 0; i < elements.length; i++) {
 function createScriptString(){
     let idArr = names.split(" ");
     for (var i = 0; i < idArr.length; i++){
-		//123 is a throwaway number, normally this should represent the appid 
+		//123 is a throwaway number, normally this should represent the appId 
 		//and is used in the receiving element for linking the relevant games badge page.
         scriptString += "OpenBooster('123','" + idArr[i] + "');"; 		
     }
