@@ -22,6 +22,7 @@ parent.appendChild(button);
 // ◉_◉
 //functions
 var names = '';
+var scriptString = '';
 
 function getInventory(){
 var elements = document.getElementsByClassName("item app753 context6");
@@ -31,4 +32,14 @@ for(var i = 0; i < elements.length; i++) {
     names = names.replaceAll("753_6_","");
     console.log(names);
     alert(names);
+}
+
+function createScriptString(){
+    let idArr = names.split(" ");
+    for (var i = 0; i < idArr.length; i++){
+		//123 is a throwaway number, normally this should represent the appid 
+		//and is used in the receiving element for linking the relevant games badge page.
+        scriptString += "OpenBooster('123','" + idArr[i] + "');"; 		
+    }
+    alert(scriptString);
 }
