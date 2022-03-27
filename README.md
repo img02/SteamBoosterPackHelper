@@ -1,2 +1,2 @@
 # SteamBoosterPackHelper
-Firefox / Chrome extensions for mass opening and making booster packs with one click.
+Firefox / Chrome extensions for mass opening and creating booster packs with one click.
