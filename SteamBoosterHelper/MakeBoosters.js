@@ -20,12 +20,14 @@ button.addEventListener("click", async () => {
 		console.log("AppIds not found, trying to get them now...");
 		await getUsersAppids(); //try to reload appids
 	}
-	if (appids.length > 0){
-	//alert(`${appids.length} + success`);
-	console.log("AppIds found! Making booster packs now.");
-	createScriptString();
-	MakeBoosters();
-	success = true;
+	if (appids.length > 0) {
+		success = true;
+		if (confirm(`Make ${appids.length} booster packs?`)) {
+			//alert(`${appids.length} + success`);
+			console.log("AppIds found! Making booster packs now.");
+			createScriptString();
+			MakeBoosters();			
+		}
 	}
 
 	if (success == false) {
@@ -66,7 +68,7 @@ async function getUsersAppids() {
 	if (res.appids.length > 0) {
 		appids = res.appids.split(",").map(item => item.trim());
 		//alert(`${appids[0]}|${appids[1]}|${appids[2]}|`);
-		console.log(`appids loaded. test: |${appids[0]}|${appids[1]}|${appids[2]}|` )
+		console.log(`appids loaded. test: |${appids[0]}|${appids[1]}|${appids[2]}|`)
 	}
 }
 

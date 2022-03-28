@@ -12,9 +12,12 @@ let parent = document.getElementById('inventory_logos');
 
 //button Event Listener
 button.addEventListener("click", () => {
-    getInventory();
-    createScriptString();
-    OpenBoosters();
+    if (confirm('Open all booster packs?')) {
+        console.log("opening boosters!")
+        getInventory();
+        createScriptString();
+        OpenBoosters();
+    }
 });
 
 parent.appendChild(button);
