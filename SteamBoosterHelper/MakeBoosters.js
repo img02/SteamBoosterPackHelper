@@ -13,10 +13,16 @@ let parent = document.querySelector(".booster_game_selector");
 parent.style.width = "600px";
 
 //button Event Listener
-button.addEventListener("click", ()=>{
-    //getBoosterAppIds();
-    createScriptString();
-    MakeBoosters();
+button.addEventListener("click", () => {
+	//alert(appids);
+	if (appids.length > 0) {
+		alert(appids.length);
+		createScriptString();
+		//MakeBoosters();
+	}
+	else {
+		alert("No appids found, did you add them via Extensions -> SteamBoosterHelper -> Options?");
+	}
 });
 
 parent.appendChild(button);
@@ -25,18 +31,33 @@ parent.appendChild(button);
 //functions
 
 let scriptString = '';
+let appids = [];
 
-function MakeBoosters(){ //inject script
+function MakeBoosters() { //inject script
 	let script = document.createElement('script');
 	script.type = 'text/javascript';
 	script.textContent = scriptString;
 	document.head.appendChild(script);
 }
 
-function createScriptString(){
-	let appids = ['1328670', '1343370', '524220', '1113560', '1158850', '787480', '412830', '324160', '1113000', '447530' ];
-	
-	appids.forEach( (id)=> 
-	scriptString += `CBoosterCreatorPage.ExecuteCreateBooster({appid: '${id}',series:'1'}, '2'); `);
+function createScriptString() {
+	//let appids = ['1328670', '1343370', '524220', '1113560', '1158850', '787480', '412830', '324160', '1113000', '447530'];
+	scriptString = ''; //reset string
+	appids.forEach((id) =>
+		scriptString += `CBoosterCreatorPage.ExecuteCreateBooster({appid: '${id}',series:'1'}, '2'); `);
 	alert(scriptString);
 }
+
+function getUsersAppids() {
+	let storageItem = browser.storage.sync.get('appids');
+	storageItem.then((res) => {
+		if (res.appids.length > 0) {
+			appids = res.appids.split(",").map(item => item.trim());
+			//alert(`${appids[0]}|${appids[1]}|${appids[2]}|`);
+		}
+	});
+	e.preventDefault();
+}
+
+//document.addEventListener('DOMContentLoaded', getUsersAppids);
+window.onload = getUsersAppids;
