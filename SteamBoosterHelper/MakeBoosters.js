@@ -13,23 +13,34 @@ let parent = document.querySelector(".booster_game_selector");
 parent.style.width = "600px";
 
 //button Event Listener
-button.addEventListener("click", () => {
-	//alert(appids);
-	if (appids.length > 0) {
-		alert(appids.length);
-		createScriptString();
-		//MakeBoosters();
+button.addEventListener("click", async () => {
+	console.log("Trying to make boosters...");
+	let success = false;
+	if (!(appids.length > 0)) {
+		console.log("AppIds not found, trying to get them now...");
+		await getUsersAppids(); //try to reload appids
 	}
-	else {
+	if (appids.length > 0){
+	//alert(`${appids.length} + success`);
+	console.log("AppIds found! Making booster packs now.");
+	createScriptString();
+	MakeBoosters();
+	success = true;
+	}
+
+	if (success == false) {
 		alert("No appids found, did you add them via Extensions -> SteamBoosterHelper -> Options?");
+		console.log("No appids found, did you add them via Extensions -> SteamBoosterHelper -> Options?");
 	}
 });
 
 parent.appendChild(button);
 //parent.style.border = "5px solid red";
 
-//functions
 
+
+// ◉_◉
+//functions
 let scriptString = '';
 let appids = [];
 
@@ -48,15 +59,15 @@ function createScriptString() {
 	alert(scriptString);
 }
 
-function getUsersAppids() {
+async function getUsersAppids() {
 	let storageItem = browser.storage.sync.get('appids');
-	storageItem.then((res) => {
-		if (res.appids.length > 0) {
-			appids = res.appids.split(",").map(item => item.trim());
-			//alert(`${appids[0]}|${appids[1]}|${appids[2]}|`);
-		}
-	});
-	e.preventDefault();
+
+	let res = await storageItem;
+	if (res.appids.length > 0) {
+		appids = res.appids.split(",").map(item => item.trim());
+		//alert(`${appids[0]}|${appids[1]}|${appids[2]}|`);
+		console.log(`appids loaded. test: |${appids[0]}|${appids[1]}|${appids[2]}|` )
+	}
 }
 
 //document.addEventListener('DOMContentLoaded', getUsersAppids);

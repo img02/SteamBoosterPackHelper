@@ -11,7 +11,7 @@ let parent = document.getElementById('inventory_logos');
 //parent.style.border = "5px solid red";
 
 //button Event Listener
-button.addEventListener("click", ()=>{
+button.addEventListener("click", () => {
     getInventory();
     createScriptString();
     OpenBoosters();
@@ -26,30 +26,31 @@ parent.appendChild(button);
 var names = '';
 var scriptString = '';
 
-function OpenBoosters(){ //inject script
-let script = document.createElement('script');
-script.type = 'text/javascript';
-script.textContent = scriptString;
-document.head.appendChild(script);
+function OpenBoosters() { //inject script
+    let script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.textContent = scriptString;
+    document.head.appendChild(script);
 }
 
-function getInventory(){
-	//gets the first 50 items in inventory, unless user loads more pages
-var elements = document.getElementsByClassName("item app753 context6"); 
-for(var i = 0; i < elements.length; i++) {
-    names += elements[i].id + " ";
+function getInventory() {
+    //gets the first 50 items in inventory, unless user loads more pages
+    var elements = document.getElementsByClassName("item app753 context6");
+    for (var i = 0; i < elements.length; i++) {
+        names += elements[i].id + " ";
     }
-    names = names.replaceAll("753_6_","");
+    names = names.replaceAll("753_6_", "");
     console.log(names);
-    alert(names);
+    //alert(names);
 }
 
-function createScriptString(){
+function createScriptString() {
     let idArr = names.split(" ");
-    for (var i = 0; i < idArr.length; i++){
-		//123 is a throwaway number, normally this should represent the appId 
-		//and is used in the receiving element for linking the relevant games badge page.
-        scriptString += "OpenBooster('123','" + idArr[i] + "');"; 		
+    for (var i = 0; i < idArr.length; i++) {
+        //123 is a throwaway number, normally this should represent the appid 
+        //and is used in the receiving element for linking the relevant games badge page.
+        scriptString += "OpenBooster('123','" + idArr[i] + "');";
     }
-    alert(scriptString);
+    //alert(scriptString);
+    console.log(scriptString);
 }
