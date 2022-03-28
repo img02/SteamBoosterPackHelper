@@ -14,6 +14,14 @@
     {
       "matches": ["*://*.steamcommunity.com/id/*/inventory/"],
       "js": ["OpenBoosters.js"]
+    },
+	{
+      "matches": [
+	  "*://*.steamcommunity.com/tradingcards/boostercreator", 
+	  "*://*.steamcommunity.com/tradingcards/boostercreator/*"
+	  ],
+	  
+      "js": ["MakeBoosters.js"]
     }
   ]
 
