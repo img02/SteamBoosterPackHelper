@@ -14,30 +14,20 @@ parent.style.width = "600px";
 
 //button Event Listener
 button.addEventListener("click", async () => {
-	console.log("Trying to make boosters...");
-	let success = false;
-	if (!(appids.length > 0)) {
-		console.log("AppIds not found, trying to get them now...");
-		await getUsersAppids(); //try to reload appids
+	if (appids.length < 1) {
+		await getUsersAppids();
 	}
-	if (appids.length > 0) {
-		success = true;
-		if (confirm(`Make ${appids.length} booster packs?`)) {
-			//alert(`${appids.length} + success`);
-			console.log("AppIds found! Making booster packs now.");
-			createScriptString();
-			MakeBoosters();			
-		}
-	}
-
-	if (success == false) {
-		alert("No appids found, did you add them via Extensions -> SteamBoosterHelper -> Options?");
-		console.log("No appids found, did you add them via Extensions -> SteamBoosterHelper -> Options?");
+	if (confirm(`Create ${appids.length} booster packs?`)) {
+		createScriptString();
 	}
 });
 
 parent.appendChild(button);
+InjectMakeBoosters();
 //parent.style.border = "5px solid red";
+
+
+
 
 
 
@@ -46,31 +36,37 @@ parent.appendChild(button);
 let scriptString = '';
 let appids = [];
 
-function MakeBoosters() { //inject script
+function InjectMakeBoosters() { //inject script 
 	let script = document.createElement('script');
-	script.type = 'text/javascript';
-	script.textContent = scriptString;
+	script.src = chrome.runtime.getURL('makeInject.js');
+	script.onload = function () {
+		this.remove();
+	};
 	document.head.appendChild(script);
 }
 
 function createScriptString() {
-	//let appids = ['1328670', '1343370', '524220', '1113560', '1158850', '787480', '412830', '324160', '1113000', '447530'];
 	scriptString = ''; //reset string
 	appids.forEach((id) =>
 		scriptString += `CBoosterCreatorPage.ExecuteCreateBooster({appid: '${id}',series:'1'}, '2'); `);
-	alert(scriptString);
+	//alert(scriptString);
+	console.log(scriptString);
+
+	window.dispatchEvent(new CustomEvent('MakeBoosterScriptString', {
+		'detail': {
+			'message': scriptString,
+		}
+	}));
 }
 
 async function getUsersAppids() {
-	let storageItem = browser.storage.sync.get('appids');
+	let storageItem = chrome.storage.sync.get('appids');
 
 	let res = await storageItem;
 	if (res.appids.length > 0) {
 		appids = res.appids.split(",").map(item => item.trim());
-		//alert(`${appids[0]}|${appids[1]}|${appids[2]}|`);
 		console.log(`appids loaded. test: |${appids[0]}|${appids[1]}|${appids[2]}|`)
 	}
 }
 
-//document.addEventListener('DOMContentLoaded', getUsersAppids);
 window.onload = getUsersAppids;

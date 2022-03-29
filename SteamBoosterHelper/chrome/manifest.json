@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "SteamBoosterHelper",
+  "version": "1.0",
+  "description": "Quickly open and create all your booster backs.",
+  "icons": {
+    "48": "icons/icon.png"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "browser_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.steamcommunity.com/id/*/inventory/"
+      ],
+      "js": [
+        "OpenBoosters.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.steamcommunity.com/tradingcards/boostercreator",
+        "*://*.steamcommunity.com/tradingcards/boostercreator/*"
+      ],
+      "js": [
+        "MakeBoosters.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "scripting"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "openInject.js",
+        "makeInject.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
+}

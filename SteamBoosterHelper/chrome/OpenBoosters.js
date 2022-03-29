@@ -13,14 +13,18 @@ let parent = document.getElementById('inventory_logos');
 //button Event Listener
 button.addEventListener("click", () => {
     if (confirm('Open all booster packs?')) {
-        console.log("opening boosters!")
+        console.log("Attempting to open...")
         getInventory();
         createScriptString();
-        OpenBoosters();
     }
 });
 
 parent.appendChild(button);
+InjectOpenBoosters();
+
+
+
+
 
 
 
@@ -29,10 +33,12 @@ parent.appendChild(button);
 var names = '';
 var scriptString = '';
 
-function OpenBoosters() { //inject script
+function InjectOpenBoosters() { //inject script    
     let script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.textContent = scriptString;
+    script.src = chrome.runtime.getURL('openInject.js');
+    script.onload = function () {
+        this.remove();
+    };
     document.head.appendChild(script);
 }
 
@@ -56,4 +62,11 @@ function createScriptString() {
     }
     //alert(scriptString);
     console.log(scriptString);
+
+    window.dispatchEvent(new CustomEvent('OpenBoosterScriptString', {
+        'detail': {
+            'message': scriptString,
+        }
+    }));
+
 }
