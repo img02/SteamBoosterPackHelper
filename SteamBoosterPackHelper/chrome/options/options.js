@@ -8,7 +8,7 @@ function saveOptions(e) {
 function restoreOptions() {
     var storageItem = chrome.storage.sync.get('appids');
     storageItem.then((res) => {
-		if (res.appids != 'undefined'){
+		if (res.appids !== 'undefined'){
         document.querySelector("#appids").innerText = res.appids;
 		}
     });
