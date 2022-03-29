@@ -1,8 +1,8 @@
 {
-  "manifest_version": 2,
-  "name": "SteamBoosterHelper",
+  "manifest_version": 3,
+  "name": "SteamBoosterPackHelper",
   "version": "1.0",
-  "description": "Quickly open and create all your booster backs.",
+  "description": "Quickly open and create all your booster packs.",
   "icons": {
     "48": "icons/icon.png"
   },
@@ -30,12 +30,18 @@
     }
   ],
   "permissions": [
-    "storage"
+    "storage",
+    "scripting"
   ],
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "SteamBoosterHelper@fakeemailthisisnotreal.com",
-      "strict_min_version": "42.0"
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "openInject.js",
+        "makeInject.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
     }
-  }
+  ]
 }

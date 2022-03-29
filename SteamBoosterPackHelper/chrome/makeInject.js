@@ -9,7 +9,7 @@ function MakeBoosters(scriptString) {
 		//document.head.removeChild(script);
 	}
 	else {
-		alert("Unable to make booster packs. Did you add appids in the options? Extensions -> SteamBoosterHelper -> Extension Options");
+		alert("Unable to make booster packs. Did you add appids in the options? Extensions -> SteamBoosterPackHelper -> Extension Options");
 	}
 }
 

@@ -31,8 +31,8 @@ button.addEventListener("click", async () => {
 	}
 
 	if (success == false) {
-		alert("No appids found, did you add them via Extensions -> SteamBoosterHelper -> Options?");
-		console.log("No appids found, did you add them via Extensions -> SteamBoosterHelper -> Options?");
+		alert("No appids found, did you add them via Extensions -> SteamBoosterPackHelper -> Options?");
+		console.log("No appids found, did you add them via Extensions -> SteamBoosterPackHelper -> Options?");
 	}
 });
 
