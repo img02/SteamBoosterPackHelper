@@ -12,7 +12,7 @@ let parent = document.getElementById('inventory_logos');
 
 //button Event Listener
 button.addEventListener("click", () => {
-    if (confirm('Open all booster packs?')) {
+    if (confirm("Open all booster packs?\n\nRecommend filtering inventory with 'booster pack' first.")) {
         console.log("Attempting to open...")
         getInventory();
         createScriptString();
