@@ -57,7 +57,7 @@ function createScriptString() {
 	scriptString = ''; //reset string
 	appids.forEach((id) =>
 		scriptString += `CBoosterCreatorPage.ExecuteCreateBooster({appid: '${id}',series:'1'}, '2'); `);
-	alert(scriptString);
+	//alert(scriptString);
 }
 
 async function getUsersAppids() {
