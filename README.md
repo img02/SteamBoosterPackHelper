@@ -2,6 +2,7 @@
 Firefox / Chrome extensions for instant opening and creating booster packs with one click.
 
 Adds a button to the Inventory and Create Booster pages.
+
 <img src="https://i.imgur.com/fo81YVg.png" width="500"><img src="https://i.imgur.com/sRHTVWB.png" width="500">
 
 
