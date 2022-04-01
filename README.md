@@ -1,5 +1,6 @@
 # SteamBoosterPackHelper
 Firefox / Chrome extensions for mass opening and creating booster packs with one click.
+<img src="https://i.imgur.com/fo81YVg.png" width="500"><img src="https://i.imgur.com/sRHTVWB.png" width="500">
 
 
 
