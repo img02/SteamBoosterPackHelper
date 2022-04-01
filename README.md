@@ -6,7 +6,9 @@ Firefox / Chrome extensions for mass opening and creating booster packs with one
 # Firefox
 
 Install the addon via: https://addons.mozilla.org/en-GB/firefox/addon/steamboosterpackhelper/
+
 Put the appids you want to make booster packs for in the options via Extensions -> SteamBoosterPackHelper -> Options.
+
 You can get appids using an [SteamDB](https://steamdb.info/) or from the store page URL, e.g. https://store.steampowered.com/app/APPIDHERE/
 
 
