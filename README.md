@@ -1,7 +1,7 @@
 # SteamBoosterPackHelper
 Firefox / Chrome extensions for instant opening and creating booster packs with one click.
 
-Adds a button to the Inventory and Create Booster pages.
+Adds a button to the Inventory and Booster Pack Creator pages.
 
 # Firefox
 
