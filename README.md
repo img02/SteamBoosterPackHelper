@@ -14,10 +14,11 @@ You can get appids using an [SteamDB](https://steamdb.info/) or from the store p
 
 # Chrome
 
-Download the Chrome folder (rename if you like) from Releases, 
+Download the zip from Releases, 
+* Unzip SteamBoosterPackHelper_Chrome.zip
 * Go to chrome://extensions/
 * Turn on Developer Mode
-* Select Load Unpacked and navigate to the downloaded folder.
+* Select Load Unpacked and navigate to the unzipped folder.
 * Go to Details -> Extension Options
 * Add the appids that you want to make booster packs for, you can get appids from  [SteamDB](https://steamdb.info/) or from the store page URL, e.g. https://store.steampowered.com/app/APPIDHERE/
 
