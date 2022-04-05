@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "SteamBoosterPackHelper",
-  "version": "1.0",
+  "version": "1.0.2",
   "description": "Quickly open and create all your booster packs.",
   "icons": {
     "48": "icons/icon.png"
@@ -36,8 +36,10 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "openInject.js",
-        "makeInject.js"
+        "injected/openInject.js",
+        "injected/makeInject.js",
+        "injected/inventoryFilterInject.js",
+        "injected/inventoryFilterClearInject.js"
       ],
       "matches": [
         "<all_urls>"

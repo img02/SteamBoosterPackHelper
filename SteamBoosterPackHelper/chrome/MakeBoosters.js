@@ -38,7 +38,7 @@ let appids = [];
 
 function InjectMakeBoosters() { //inject script 
 	let script = document.createElement('script');
-	script.src = chrome.runtime.getURL('makeInject.js');
+	script.src = chrome.runtime.getURL('injected/makeInject.js');
 	script.onload = function () {
 		this.remove();
 	};

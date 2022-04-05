@@ -12,15 +12,25 @@ let parent = document.getElementById('inventory_logos');
 
 //button Event Listener
 button.addEventListener("click", () => {
-    if (confirm("Open all booster packs?\n\nRecommend filtering inventory with 'booster pack' first.")) {
+    if (confirm("Open all booster packs?\n\nWill attempt to filter inventory. If lagging, please manually filter for 'booster pack'.")) {
+
         console.log("Attempting to open...")
-        getInventory();
-        createScriptString();
+        console.log("Filtering inventory... please wait.")
+        inventoryFilter();
+
+        setTimeout(function () {
+            getInventory();
+            createScriptString();
+        }, 2500);
+
     }
 });
 
 parent.appendChild(button);
+
 InjectOpenBoosters();
+InjectInventoryFilter();
+InjectClearInventoryFilter();
 
 
 
@@ -35,7 +45,7 @@ let scriptString = '';
 
 function InjectOpenBoosters() { //inject script    
     let script = document.createElement('script');
-    script.src = chrome.runtime.getURL('openInject.js');
+    script.src = chrome.runtime.getURL('injected/openInject.js');
     script.onload = function () {
         this.remove();
     };
@@ -43,38 +53,72 @@ function InjectOpenBoosters() { //inject script
 }
 
 function getInventory() {
-	names = ''; //reset string
+    names = ''; //reset string
     //gets the first 50 items in inventory, unless user loads more pages
-    let elements = document.getElementsByClassName("itemHolder");	
+    let elements = document.getElementsByClassName("itemHolder");
     for (var i = 0; i < elements.length; i++) {
-		if (elements[i].style.getPropertyValue('display') != "none"){
-			if (elements[i].firstChild != null){
-        names += elements[i].firstChild.id + " ";
-			}
-		}
+        if (elements[i].style.getPropertyValue('display') != "none") {
+            if (elements[i].firstChild != null) {
+                names += elements[i].firstChild.id + " ";
+            }
+        }
     }
     names = names.replaceAll("753_6_", "");
-    console.log(names);
+    console.log("appids: \n" + names);
     //alert(names);
 }
 
 function createScriptString() {
-	scriptString = ''; //reset string
+    scriptString = ''; //reset string
     let idArr = names.split(" ");
     for (var i = 0; i < idArr.length; i++) {
         //123 is a throwaway number, normally this should represent the appid 
         //and is used in the receiving element for linking the relevant games badge page.
-        if (idArr[i] != 'undefined' && idArr[i] != ''){
-        scriptString += "OpenBooster('123','" + idArr[i] + "');";
-		}
+        if (idArr[i] != 'undefined' && idArr[i] != '') {
+            scriptString += "OpenBooster('123','" + idArr[i] + "');";
+        }
     }
     //alert(scriptString);
-    console.log(scriptString);
+    //console.log("Script String: " + scriptString);
 
     window.dispatchEvent(new CustomEvent('OpenBoosterScriptString', {
         'detail': {
             'message': scriptString,
         }
     }));
+}
+
+
+
+//scripts for filtering inventory
+
+function InjectInventoryFilter() {
+    let script = document.createElement('script');
+    script.src = chrome.runtime.getURL('injected/inventoryFilterInject.js');
+    script.onload = function () {
+        this.remove();
+    };
+    document.head.appendChild(script);
+}
+
+function InjectClearInventoryFilter() {
+    let script = document.createElement('script');
+    script.src = chrome.runtime.getURL('injected/inventoryFilterClearInject.js');
+    script.onload = function () {
+        this.remove();
+    };
+    document.head.appendChild(script);
+}
+
+function inventoryFilter() {
+    window.dispatchEvent(new CustomEvent('inventoryFilter', {
+        'detail': {
+            'message': 'idk',
+        }
+    }));
+}
+
+function clearInventoryFilter() {
 
 }
+

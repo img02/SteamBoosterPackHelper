@@ -26,7 +26,7 @@ button.addEventListener("click", async () => {
 			//alert(`${appids.length} + success`);
 			console.log("AppIds found! Making booster packs now.");
 			createScriptString();
-			MakeBoosters();			
+			MakeBoosters();
 		}
 	}
 
@@ -53,7 +53,7 @@ function MakeBoosters() { //inject script
 	document.head.appendChild(script);
 }
 
-function createScriptString() {	
+function createScriptString() {
 	scriptString = ''; //reset string
 	appids.forEach((id) =>
 		scriptString += `CBoosterCreatorPage.ExecuteCreateBooster({appid: '${id}',series:'1'}, '2'); `);
