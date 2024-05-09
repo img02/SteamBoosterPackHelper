@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "SteamBoosterPackHelper",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Quickly open and create all your booster packs.",
   "icons": {
     "48": "icons/icon.png"
@@ -13,7 +13,9 @@
   "content_scripts": [
     {
       "matches": [
-        "*://*.steamcommunity.com/id/*/inventory/"
+        "*://*.steamcommunity.com/id/*/inventory/",
+		"*://*.steamcommunity.com/id/*/inventory"
+		
       ],
       "js": [
         "OpenBoosters.js"
